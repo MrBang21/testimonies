@@ -35,21 +35,33 @@
 		"gallery": []
 	},
 	{
-		"id": "anonymous132",
-		"name": "Anonymous Survivor",
+		"id": "anonymousmalecameroon",
+		"name": "Anonymous Male from Cameroon",
 		"gender": "male",
-		"content": ["I was circumcised soon after birth. It is something that has bothered me deeply throughout my life, affecting my body image and sensitivity."],
-		"picture": "",
 		"profile": "",
+		"picture": "",
+		"content": [
+			"Location: Douala, Cameroon",
+			"Male genital mutilation (circumcision) is legal here. Female genital mutilation is illegal.",
+			"I did not realize I had been circumcised until I was 30 years old. Discovering that a part of my body had been permanently removed without my knowledge or consent was shocking.",
+			"When I confronted my parents, they gave me every justification imaginable. Tradition. Religion. HIV prevention. Claims that women prefer it. Even accusations that I had been &quot;brainwashed&quot; by France. Excuse after excuse, anything except acknowledging what had been done to me.",
+			"I demanded one of two things: a sincere apology or that I would remove them from my life. They knelt and asked for forgiveness, and for a time I believed they genuinely regretted their decision.",
+			"Later, I realized nothing had really changed.",
+			"Whenever I tried to discuss circumcision, they ignored me. They allowed their financially dependent son to have their grandchildren circumcised. They continued associating with relatives who tried to silence me whenever I spoke about the issue.",
+			"Their actions showed me that they did not truly regret what they had done. They were comfortable maintaining relationships with people who supported and perpetuated the same practice.",
+			"The hardest part was not discovering that I had been circumcised. The hardest part was realizing how little concern the people around me had for what had been taken from me.",
+			"That realization changed how I viewed my family. Eventually, I chose to cut ties and disappear from their lives. Today, none of my relatives know where I live.",
+			"My experience taught me that circumcision is not only about the physical act itself. It is also about the refusal to listen to those who object to what was done to them, even after they find the courage to speak."
+		],
 		"gallery": []
 	},
 	{
-		"id": "janedoe133",
-		"name": "Jane Doe",
+		"id": "placeholderfemale",
+		"name": "Placeholder Female",
 		"gender": "female",
-		"content": ["As a mother, I wasn't fully informed about the procedure when I consented for my son. I regret that decision every single day."],
+		"profile": "",
 		"picture": "",
-		"profile": "https://x.com/janedoe",
+		"content": ["This is a placeholder profile."],
 		"gallery": [
 			{"url": "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=500", "nsfw": true},
 			{"url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500", "nsfw": false},
