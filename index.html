@@ -24,7 +24,7 @@
 <style>
 :root {
 	color-scheme: light dark;
-	--bg: oklch(.95 0 0);
+	--body: oklch(.95 0 0);
 	--text: oklch(.3 0 0);
 	--muted: oklch(.4 0 0);
 	--card: oklch(1 0 0);
@@ -40,7 +40,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--bg: oklch(.2 0 0);
+		--body: oklch(.2 0 0);
 		--text: oklch(.9 0 0);
 		--muted: oklch(.7 0 0);
 		--card: oklch(.25 0 0);
@@ -68,8 +68,9 @@ body {
 	height: 100svh;
 	overflow: hidden;
 	font-family: system-ui, sans-serif;
-	background: var(--bg);
+	background: var(--body);
 	color: var(--text);
+	scrollbar-color: var(--accent) var(--body);
 }
 
 a {
@@ -202,6 +203,7 @@ a {
 		.content {
 			line-height: 1.5;
 			overflow-y: auto;
+			scrollbar-color: var(--accent) var(--card);
 			p {
 				margin: 0 0 1em 0;
 				&:last-child {
@@ -466,7 +468,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		template = document.getElementById('post-template'),
 		imageTemplate = document.getElementById('image-template');
 
-	fetch('data.json')
+	fetch(`data.json?v=${Date.now()}`)
 		.then(response => response.json())
 		.then(data => {
 			let anon = 0;
