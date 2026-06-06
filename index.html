@@ -464,9 +464,14 @@ let NSFW = {
 document.addEventListener('DOMContentLoaded', async () => {
 	const
 		app = document.getElementById('app'),
-		template = document.getElementById('post-template'),
-		imageTemplate = document.getElementById('image-template');
-
+		postTemplate = document.getElementById('post-template'),
+		imageTemplate = document.getElementById('image-template'),
+		decode = str => {
+			const
+				parser = new DOMParser(),
+				doc = parser.parseFromString(str, 'text/html');
+			return doc.documentElement.textContent;
+		};
 	fetch(`data.json?v=${Date.now()}`)
 		.then(response => response.json())
 		.then(data => {
@@ -475,13 +480,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 			data.forEach(item => {
 			const
-				clone = template.content.cloneNode(true),
-				post = clone.querySelector('.post'),
-				card = clone.querySelector('.card'),
-				name = clone.querySelector('.name'),
-				avatar = clone.querySelector('.avatar'),
-				content = clone.querySelector('.content'),
-				gallery = clone.querySelector('.gallery');
+				postClone = postTemplate.content.cloneNode(true),
+				post = postClone.querySelector('.post'),
+				card = postClone.querySelector('.card'),
+				name = postClone.querySelector('.name'),
+				avatar = postClone.querySelector('.avatar'),
+				content = postClone.querySelector('.content'),
+				gallery = postClone.querySelector('.gallery');
 
 			post.id = item.id || ++anon;
 			card.classList.add(item.gender || 'shared');
@@ -515,11 +520,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 			if (Array.isArray(item.content)) {
 				item.content.forEach(text => {
 					const p = document.createElement('p');
-					p.textContent = text;
+					p.textContent = decode(text);
 					content.append(p);
 				});
 			} else {
-				content.textContent = item.content;
+				content.textContent = decode(item.content);
 			}
 
 			if (item.gallery && item.gallery.length > 0) {
@@ -543,14 +548,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 				});
 			}
 
-			const sourceParent = clone.querySelector('.source');
+			const sourceParent = postClone.querySelector('.source');
 			if (item.source) {
 				sourceParent.querySelector('a').href = item.source;
 			} else {
 				sourceParent.remove();
 			}
 
-			app.append(clone);
+			app.append(postClone);
 		});
 
 		const
