@@ -56,12 +56,21 @@
 		"gallery": []
 	},
 	{
-		"id": "placeholderfemale",
-		"name": "Placeholder Female",
-		"gender": "female",
+		"id": null,
+		"name": "Anonymous Male from America",
+		"gender": "male",
 		"profile": "",
 		"picture": "",
-		"content": ["This is a placeholder profile."],
+		"content": ["I was circumsized when I was an infant. I learned about the functions of the foreskin when I was a teenager and confronted my father about his decision to mutilate my body. He brushed it off and said it was done to him as well. This is ritualistic abuse done to so many children for no legitimate reason. I don’t care about someone‘s religion. If your religion compells you to do this to infants or any man then you‘re a monster. If you have this done to your children because it was done to you then you are a coward. I have been restoring my foreskin, and it is a long, tiring process. I want everyone responsible for this practice to hang. I want to see a world where circumsision is eradicated."],
+		"gallery": []
+	},
+	{
+		"id": "placeholdergallery",
+		"name": "Placeholder Gallery",
+		"gender": "other",
+		"profile": "",
+		"picture": "",
+		"content": ["This is a placeholder profile. Used for testing purposes only with a gallery of images."],
 		"gallery": [
 			{"url": "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=500", "nsfw": true},
 			{"url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500", "nsfw": false},
