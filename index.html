@@ -213,10 +213,10 @@ a {
 		}
 		.gallery {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(50px, 200px));
+			grid-auto-flow: column dense;
+			grid-auto-columns: minmax(120px, clamp(120px, 15vw, 200px));
 			gap: .5em;
 			margin-top: 1em;
-			flex-shrink: 0;
 			button {
 				padding: 0;
 				margin: 0;
@@ -411,7 +411,6 @@ button {
 </template>
 
 <template id="image-template">
-	<!-- if the image is NSFW, add the nsfw class and disable the button as default unless has been accepted -->
 	<button class="">
 		<img src="" alt="">
 	</button>
