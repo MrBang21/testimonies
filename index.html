@@ -30,10 +30,12 @@
 	--card: oklch(1 0 0);
 	--hue-female: 340;
 	--hue-male: 240;
-	--hue-other: 140;
+	--hue-other: 300;
+	--hue-accent: 140;
 	--shadow: oklch(.5 0 0 / .1);
 	--light: .7;
 	--chroma: .18;
+	--accent: oklch(var(--light) var(--chroma) var(--hue-accent));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,6 +70,16 @@ body {
 	font-family: system-ui, sans-serif;
 	background: var(--bg);
 	color: var(--text);
+}
+
+a {
+	color: var(--accent);
+	text-decoration: none;
+	transition: color .2s;
+	&:hover {
+		color: var(--accent);
+		text-decoration: underline;
+	}
 }
 
 #background {
@@ -370,7 +382,11 @@ button {
 <body>
 <div id="background">
 	<h1>Testimonies Against<br>Circumcision</h1>
-	<div>#MenDoComplain #IfIWereABoy</div>
+	<div>
+		<a href="https://x.com/hashtag/MenDoComplain" target="_blank">#MenDoComplain</a>
+		<a href="https://x.com/hashtag/IfIWereABoy" target="_blank">#IfIWereABoy</a>
+		<a href="https://x.com/hashtag/IAmNotThankful" target="_blank">#IAmNotThankful</a>
+	</div>
 </div>
 <main id="app"></main>
 
@@ -453,7 +469,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	fetch('data.json')
 		.then(response => response.json())
 		.then(data => {
-			// randomize order
+			let anon = 0;
 			data.sort(() => Math.random() - 0.5);
 
 			data.forEach(item => {
@@ -466,7 +482,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				content = clone.querySelector('.content'),
 				gallery = clone.querySelector('.gallery');
 
-			post.id = item.id;
+			post.id = item.id || ++anon;
 			card.classList.add(item.gender || 'shared');
 
 			if (item.picture) {
