@@ -2,10 +2,11 @@
 	{
 		"id": "mrbang21",
 		"name": "MrBang21",
-		"gender": "male",
+		"gender": "author",
 		"profile": "https://x.com/MrBang21",
 		"picture": "https://unavatar.io/x/MrBang21",
 		"source": "https://x.com/MrBang21/status/2063126951728984545",
+		"date": "2026-06-06",
 		"content": [
 			"I wasn't circumcised because I was born in a country where the practice is uncommon outside of specific religious communities.",
 			"The first time I became aware of circumcision was as a child in school. One of my classmates was circumcised, and when we asked about it, he explained that it had been done because of his family's religion. What stood out to me was that it had not been his choice. We were curious, confused, and left wondering why anyone would alter a child's body for reasons the child could neither understand nor consent to. Nobody mocked him. If anything, we felt sympathy for him.",
@@ -18,8 +19,8 @@
 			"Every testimony represents a human being, a unique life, and a perspective that deserves to be preserved. Even when people disagree, understanding begins with listening. My hope is that these stories encourage reflection, empathy, and a greater respect for every person's right to make decisions about their own body."
 		],
 		"gallery": [
-			{"url": "https://pbs.twimg.com/media/HKFo4omW4AAguaX?format=jpg&name=large", "nsfw": false},
 			{"url": "https://pbs.twimg.com/media/HKFc6fQWcAAG_Mm?format=png&name=large", "nsfw": false},
+			{"url": "https://pbs.twimg.com/media/HKFo4omW4AAguaX?format=jpg&name=large", "nsfw": false},
 			{"url": "https://pbs.twimg.com/media/HJyMzbZWoAAXCpi?format=jpg&name=large", "nsfw": false}
 		]
 	},
@@ -30,6 +31,7 @@
 		"profile": "https://x.com/Nikorasu85",
 		"picture": "https://unavatar.io/x/Nikorasu85",
 		"source": "https://x.com/Nikorasu85/status/2062638960719917259",
+		"date": "2026-06-04",
 		"content": [
 			"I complain!",
 			"I will always wish it were not done to me.",
@@ -42,13 +44,15 @@
 		"id": "FokamKuateHerve",
 		"name": "Fokam Kuate Hervé",
 		"gender": "male",
-		"profile": "",
-		"picture": "",
+		"profile": null,
+		"picture": null,
+		"source": null,
+		"date": "2026-06-07",
 		"content": [
 			"Location: Douala, Cameroon",
 			"Male genital mutilation (circumcision) is legal here. Female genital mutilation is illegal.",
 			"I did not realize I had been circumcised until I was 30 years old. Discovering that a part of my body had been permanently removed without my knowledge or consent was shocking.",
-			"When I confronted my parents, they gave me every justification imaginable. Tradition. Religion. HIV prevention. Claims that women prefer it. Even accusations that I had been &quot;brainwashed&quot; by France. Excuse after excuse, anything except acknowledging what had been done to me.",
+			"When I confronted my parents, they gave me every justification imaginable. Tradition. Religion. HIV prevention. Claims that women prefer it. Even accusations that I had been \"brainwashed\" by France. Excuse after excuse, anything except acknowledging what had been done to me.",
 			"I demanded one of two things: a sincere apology or that I would remove them from my life. They knelt and asked for forgiveness, and for a time I believed they genuinely regretted their decision.",
 			"Later, I realized nothing had really changed.",
 			"Whenever I tried to discuss circumcision, they ignored me. They allowed their financially dependent son to have their grandchildren circumcised. They continued associating with relatives who tried to silence me whenever I spoke about the issue.",
@@ -63,9 +67,30 @@
 		"id": "DrewWalker",
 		"name": "Drew Walker",
 		"gender": "male",
-		"profile": "",
-		"picture": "",
-		"content": ["I was circumsized when I was an infant. I learned about the functions of the foreskin when I was a teenager and confronted my father about his decision to mutilate my body. He brushed it off and said it was done to him as well. This is ritualistic abuse done to so many children for no legitimate reason. I don’t care about someone‘s religion. If your religion compells you to do this to infants or any man then you‘re a monster. If you have this done to your children because it was done to you then you are a coward. I have been restoring my foreskin, and it is a long, tiring process. I want everyone responsible for this practice to hang. I want to see a world where circumsision is eradicated."],
+		"profile": "https://x.com/DrewWal51441983",
+		"picture": "https://unavatar.io/x/DrewWal51441983",
+		"source": null,
+		"date": "2026-06-07",
+		"content": [
+			"I was circumsized when I was an infant. I learned about the functions of the foreskin when I was a teenager and confronted my father about his decision to mutilate my body. He brushed it off and said it was done to him as well. This is ritualistic abuse done to so many children for no legitimate reason. I don’t care about someone‘s religion. If your religion compells you to do this to infants or any man then you‘re a monster. If you have this done to your children because it was done to you then you are a coward. I have been restoring my foreskin, and it is a long, tiring process. I want everyone responsible for this practice to hang. I want to see a world where circumsision is eradicated."
+		],
+		"gallery": []
+	},
+	{
+		"id": "sgtkwol",
+		"name": "Tim K",
+		"gender": "male",
+		"profile": "https://x.com/sgtkwol",
+		"picture": "https://unavatar.io/x/sgtkwol",
+		"source": "https://x.com/sgtkwol/status/2064015855621448172",
+		"date": "2026-06-08",
+		"content": [
+			"I was indifferent to it into early adulthood. I was lightly exposed to what it entails via **Penn & Teller:Bullshit!** My wife joined me in that opposition when she saw how lethargic and damaged infants are after being cut.",
+			"My real turning point was being re-introduced to the idea of \"restoring\". (Bullshit did cover that, but I saw it as a weird thing old men do at the time.) I looked into it for a solid week before starting.",
+			"Those early results made things better and I started checking both sides of the circumcision debate.",
+			"The more function of foreskin I regained, the better things were for me. I realized I should've had what I gained, and more, for my whole life.",
+			"So should others. I also delved more into the risks vs benefits and saw how weak benefits were and how prevalent the damages are."
+		],
 		"gallery": []
 	}
 ]
