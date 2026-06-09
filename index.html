@@ -211,13 +211,13 @@ article {
 		}
 		.by {
 			display: flex;
-			flex-direction: column;
 			gap: .25em;
-			flex:auto;
+			flex: 1;
+			flex-wrap: wrap;
 			.name {
 				font-weight: bold;
 				font-size: 1.2em;
-				flex: 1;
+				flex: 1 1 100%;
 				a {
 					color: var(--accent);
 					text-decoration: none;
@@ -227,9 +227,14 @@ article {
 					}
 				}
 			}
-			.date {
-				font-size: 0.9em;
-				color: var(--muted);
+			.details {
+				display: flex;
+				flex-wrap: wrap;
+				> * {
+					margin-right: 1em;
+					font-size: 0.9em;
+					color: var(--muted);
+				}
 			}
 		}
 		.source {
@@ -453,7 +458,10 @@ button {
 				<div class="avatar"></div>
 				<div class="by">
 					<div class="name"></div>
-					<time class="date" datetime="">[date missing]</time>
+					<div class="details">
+						<time class="date" datetime=""></time>
+						<span class="location"></span>
+					</div>
 				</div>
 				<div class="source">
 					<a href="" target="_blank" rel="noopener" aria-label="Original source" title="Original source">
@@ -586,6 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 			return root;
 		};
+	// Load data and populate posts
 	fetch(
 			`data.json?v=${Date.now()}`,
 			{
@@ -606,6 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					avatar = article.querySelector('.avatar'),
 					name = article.querySelector('.name'),
 					date = article.querySelector('.date'),
+					location = article.querySelector('.location'),
 					source = article.querySelector('.source'),
 					soureLink = source.querySelector('a'),
 					content = article.querySelector('.content'),
@@ -646,12 +656,20 @@ document.addEventListener('DOMContentLoaded', () => {
 						date.setAttribute('datetime', dateObj.toISOString());
 					}
 				}
+				else {
+					date.remove();
+				}
+				if (item.location) {
+					location.textContent = item.location;
+				}
+				else {
+					location.remove();
+				}
 				if (item.source) {
 					soureLink.href = item.source;
 				} else {
 					source.remove();
 				}
-
 				if (Array.isArray(item.content)) {
 					item.content.forEach(text => {
 						content.append(markup(text));
@@ -659,7 +677,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				} else {
 					content.append(markup(item.content));
 				}
-
 				if (item.gallery && item.gallery.length > 0) {
 					item.gallery.slice(0, 4).forEach(itemObj => {
 						const
@@ -683,28 +700,11 @@ document.addEventListener('DOMContentLoaded', () => {
 				else {
 					gallery.remove();
 				}
-
 				fragment.append(postClone);
 			});
-
 		app.append(fragment);
 
-		const
-			dialogNSFW = document.getElementById('nsfw-warning'),
-			acceptNSFW = document.getElementById('accept-nsfw'),
-			rejectNSFW = document.getElementById('reject-nsfw');
-
-		acceptNSFW.addEventListener('click', () => {
-			NSFW.answered = true;
-			NSFW.show = true;
-			document.body.classList.add('nsfw');
-			document.querySelectorAll('.gallery button.nsfw').forEach(btn => btn.disabled = false);
-		});
-
-		rejectNSFW.addEventListener('click', () => {
-			NSFW.answered = true;
-		});
-
+		// Intersection Observer for updating body class and URL hash
 		const observer = new IntersectionObserver((entries) => {
 			for (const entry of entries) {
 				if (entry.isIntersecting) {
@@ -742,6 +742,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		console.error('Error loading data:', err);
 	});
 
+	// NSFW warning
+	const
+		dialogNSFW = document.getElementById('nsfw-warning'),
+		acceptNSFW = document.getElementById('accept-nsfw'),
+		rejectNSFW = document.getElementById('reject-nsfw');
+
+	acceptNSFW.addEventListener('click', () => {
+		NSFW.answered = true;
+		NSFW.show = true;
+		document.body.classList.add('nsfw');
+		document.querySelectorAll('.gallery button.nsfw').forEach(btn => btn.disabled = false);
+	});
+
+	rejectNSFW.addEventListener('click', () => {
+		NSFW.answered = true;
+	});
+
+	// Lightbox
 	const
 		lightbox = document.getElementById('lightbox'),
 		image = document.getElementById('image'),
