@@ -3,6 +3,7 @@
 		"id": "mrbang21",
 		"name": "MrBang21",
 		"gender": "author",
+		"location": "Denmark",
 		"profile": "https://x.com/MrBang21",
 		"picture": "https://unavatar.io/x/MrBang21",
 		"source": "https://x.com/MrBang21/status/2063126951728984545",
@@ -28,6 +29,7 @@
 		"id": "Nikorasu85",
 		"name": "Nikorasu85",
 		"gender": "male",
+		"location": "United States",
 		"profile": "https://x.com/Nikorasu85",
 		"picture": "https://unavatar.io/x/Nikorasu85",
 		"source": "https://x.com/Nikorasu85/status/2062638960719917259",
@@ -44,12 +46,12 @@
 		"id": "FokamKuateHerve",
 		"name": "Fokam Kuate Hervé",
 		"gender": "male",
+		"location": "Douala, Cameroon",
 		"profile": null,
 		"picture": null,
 		"source": null,
 		"date": "2026-06-07",
 		"content": [
-			"Location: Douala, Cameroon",
 			"Male genital mutilation (circumcision) is legal here. Female genital mutilation is illegal.",
 			"I did not realize I had been circumcised until I was 30 years old. Discovering that a part of my body had been permanently removed without my knowledge or consent was shocking.",
 			"When I confronted my parents, they gave me every justification imaginable. Tradition. Religion. HIV prevention. Claims that women prefer it. Even accusations that I had been \"brainwashed\" by France. Excuse after excuse, anything except acknowledging what had been done to me.",
@@ -67,6 +69,7 @@
 		"id": "DrewWalker",
 		"name": "Drew Walker",
 		"gender": "male",
+		"location": "United States",
 		"profile": "https://x.com/DrewWal51441983",
 		"picture": "https://unavatar.io/x/DrewWal51441983",
 		"source": null,
@@ -80,6 +83,7 @@
 		"id": "sgtkwol",
 		"name": "Tim K",
 		"gender": "male",
+		"location": "United States",
 		"profile": "https://x.com/sgtkwol",
 		"picture": "https://unavatar.io/x/sgtkwol",
 		"source": "https://x.com/sgtkwol/status/2064015855621448172",
@@ -90,6 +94,20 @@
 			"Those early results made things better and I started checking both sides of the circumcision debate.",
 			"The more function of foreskin I regained, the better things were for me. I realized I should've had what I gained, and more, for my whole life.",
 			"So should others. I also delved more into the risks vs benefits and saw how weak benefits were and how prevalent the damages are."
+		],
+		"gallery": []
+	},
+	{
+		"id": "darewin",
+		"name": "Dare Win",
+		"gender": "male",
+		"location": "United States",
+		"profile": null,
+		"picture": null,
+		"source": null,
+		"date": "2026-06-10",
+		"content": [
+			"I was a young boy when the scar first peeled. I didn't understand what had happened, but I knew instinctively that I didn't like it."
 		],
 		"gallery": []
 	}
