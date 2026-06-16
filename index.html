@@ -68,6 +68,8 @@
 	--light: .7;
 	--chroma: .18;
 	--accent: oklch(var(--light) var(--chroma) var(--hue-accent));
+
+	--quick-width: 20ch;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -88,6 +90,10 @@
 	scrollbar-gutter: auto;
 	corner-shape: squircle;
 	text-wrap-style: pretty;
+	&.male { --hue: var(--hue-male); }
+	&.female { --hue: var(--hue-female); }
+	&.other { --hue: var(--hue-other); }
+	&.author { --hue: var(--hue-author); }
 }
 
 html {
@@ -103,10 +109,7 @@ body {
 	background: var(--body);
 	color: var(--text);
 	scrollbar-color: var(--accent) var(--body);
-	&.male { --accent: oklch(var(--light) var(--chroma) var(--hue-male)); }
-	&.female { --accent: oklch(var(--light) var(--chroma) var(--hue-female)); }
-	&.other { --accent: oklch(var(--light) var(--chroma) var(--hue-other)); }
-	&.author { --accent: oklch(var(--light) var(--chroma) var(--hue-author)); }
+	--accent: oklch(var(--light) var(--chroma) var(--hue));
 	transition: scrollbar-color .3s, color .3s;
 }
 
@@ -159,6 +162,54 @@ q {
 	overflow-y: scroll;
 	scroll-snap-type: y mandatory;
 	scroll-behavior: smooth;
+	position: fixed;
+	z-index: 2;
+	inset: 0;
+}
+#quick {
+	position: fixed;
+	top: 50%;
+	left: 0em;
+	transform: translateY(-50%);
+	display: flex;
+	display: none;
+	flex-direction: column;
+	background: var(--card);
+	border-radius: 0 1em 1em 0;
+	border: 1px solid var(--muted);
+	border-left: none;
+	width: var(--quick-width);
+	gap: .5em;
+	z-index: 1;
+	height: 300px;
+	padding: 4em 1em;
+	box-sizing: border-box;
+	overflow: hidden;
+	mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+	-webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+	a {
+		text-decoration: none;
+		color: var(--text);
+		opacity: 0.3;
+		transform-origin: left center;
+		transition:
+			opacity 0.3s,
+			scale 0.3s,
+			color 0.3s;
+		font-size: 1em;
+		scale: 0.75;
+		white-space: nowrap;
+		color: oklch(var(--light) var(--chroma) var(--hue));
+		&:hover {
+			opacity: 0.8;
+			scale: 1;
+		}
+		&.active {
+			scale: 1;
+			opacity: 1;
+			font-weight: bold;
+		}
+	}
 }
 
 .post {
@@ -438,6 +489,16 @@ button {
 		}
 	}
 }
+
+@media (width > 1000px) {
+	#background,
+	#app {
+		left: var(--quick-width);
+	}
+	#quick {
+		display: flex;
+	}
+}
 </style>
 </head>
 <body>
@@ -449,7 +510,14 @@ button {
 		<a href="https://x.com/hashtag/IAmNotThankful" target="_blank">#IAmNotThankful</a>
 	</div>
 </div>
+<aside id="quick"></aside>
 <main id="app"></main>
+
+<template id="quick-item-template">
+	<a href="" class="">
+		<div class="name"></div>
+	</a>
+</template>
 
 <template id="post-template">
 	<div class="post">
@@ -619,7 +687,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					source = article.querySelector('.source'),
 					soureLink = source.querySelector('a'),
 					content = article.querySelector('.content'),
-					gallery = article.querySelector('.gallery');
+					gallery = article.querySelector('.gallery'),
+					quick = document.getElementById('quick'),
+					quickItem = document.getElementById('quick-item-template').content.cloneNode(true),
+					quickLink = quickItem.querySelector('a'),
+					quickName = quickItem.querySelector('.name');
 
 				post.id = item.id || ++anon;
 				article.classList.add(item.gender || 'shared');
@@ -649,6 +721,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				} else {
 					name.textContent = item.name || 'Anonymous';
 				}
+				
+				quickName.textContent = item.name || 'Anonymous';
+				quickLink.href = `#${post.id}`;
+				quickLink.classList.add(item.gender || 'shared');
+				quick.append(quickLink);
+
 				if (item.date) {
 					const dateObj = new Date(item.date);
 					if (!isNaN(dateObj)) {
@@ -711,6 +789,19 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.body.classList.remove('male', 'female', 'other', 'author');
 					document.body.classList.add(... entry.target.querySelector('article').classList);
 					history.replaceState(null, null, '#' + entry.target.id);
+					
+					const quick = document.getElementById('quick');
+					const quickLinks = quick.querySelectorAll('a');
+					quickLinks.forEach(link => link.classList.remove('active'));
+					const activeLink = quick.querySelector(`a[href="#${entry.target.id}"]`);
+					if (activeLink) {
+						activeLink.classList.add('active');
+						quick.scrollTo({
+							top: activeLink.offsetTop - quick.offsetHeight / 2 + activeLink.offsetHeight / 2,
+							behavior: 'smooth'
+						});
+					}
+
 					clearTimeout(NSFW.timeout);
 					if (!NSFW.answered && !!entry.target.querySelector('.nsfw') && !dialogNSFW.open) {
 						NSFW.timeout = setTimeout(() => {
@@ -736,6 +827,30 @@ document.addEventListener('DOMContentLoaded', () => {
 				target.scrollIntoView();
 			}
 		}
+
+		// Rotary encoder wheel & touch controls on #quick
+		const quick = document.getElementById('quick');
+		quick.addEventListener('wheel', (e) => {
+			e.preventDefault();
+			const dir = Math.sign(e.deltaY);
+			app.scrollBy({ top: dir * window.innerHeight * 0.5, behavior: 'smooth' });
+		}, {passive: false});
+
+		let quickTouchY = 0;
+		quick.addEventListener('touchstart', (e) => {
+			quickTouchY = e.touches[0].clientY;
+		}, {passive: true});
+		quick.addEventListener('touchmove', (e) => {
+			e.preventDefault();
+		}, {passive: false});
+		quick.addEventListener('touchend', (e) => {
+			const touchEndY = e.changedTouches[0].clientY;
+			const diff = quickTouchY - touchEndY;
+			if (Math.abs(diff) > 20) {
+				const dir = Math.sign(diff);
+				app.scrollBy({ top: dir * window.innerHeight * 0.5, behavior: 'smooth' });
+			}
+		});
 
 	})
 	.catch(err => {
