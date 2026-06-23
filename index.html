@@ -55,18 +55,18 @@
 <style>
 :root {
 	color-scheme: light dark;
-	--body: oklch(.95 0 0);
-	--text: oklch(.3 0 0);
-	--muted: oklch(.4 0 0);
+	--body: oklch(0.95 0 0);
+	--text: oklch(0.3 0 0);
+	--muted: oklch(0.4 0 0);
 	--card: oklch(1 0 0);
 	--hue-female: 340;
 	--hue-male: 240;
 	--hue-other: 300;
 	--hue-accent: 140;
 	--hue-author: 60;
-	--shadow: oklch(.5 0 0 / .1);
-	--light: .7;
-	--chroma: .18;
+	--shadow: oklch(0.5 0 0 / 0.1);
+	--light: 0.7;
+	--chroma: 0.18;
 	--accent: oklch(var(--light) var(--chroma) var(--hue-accent));
 
 	--quick-width: 20ch;
@@ -74,13 +74,13 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--body: oklch(.2 0 0);
-		--text: oklch(.9 0 0);
-		--muted: oklch(.7 0 0);
-		--card: oklch(.25 0 0);
-		--shadow: oklch(0 0 0 / .4);
-		--light: .9;
-		--chroma: .11;
+		--body: oklch(0.2 0 0);
+		--text: oklch(0.9 0 0);
+		--muted: oklch(0.7 0 0);
+		--card: oklch(0.25 0 0);
+		--shadow: oklch(0 0 0 / 0.4);
+		--light: 0.9;
+		--chroma: 0.11;
 	}
 }
 
@@ -97,7 +97,7 @@
 }
 
 html {
-	font-size: clamp(1rem, 1vw + .25rem, 1.5rem);
+	font-size: clamp(1rem, 1vw + .25rem, 1.25rem);
 }
 
 body {
@@ -110,13 +110,13 @@ body {
 	color: var(--text);
 	scrollbar-color: var(--accent) var(--body);
 	--accent: oklch(var(--light) var(--chroma) var(--hue));
-	transition: scrollbar-color .3s, color .3s;
+	transition: scrollbar-color 0.3s, color 0.3s;
 }
 
 a {
 	color: var(--accent);
 	text-decoration: none;
-	transition: color .2s;
+	transition: color 0.2s;
 	&:hover {
 		color: var(--accent);
 		text-decoration: underline;
@@ -169,19 +169,19 @@ q {
 #quick {
 	position: fixed;
 	top: 50%;
-	left: 0em;
+	left: 0;
 	transform: translateY(-50%);
 	display: flex;
 	display: none;
 	flex-direction: column;
 	background: var(--card);
 	border-radius: 0 1em 1em 0;
-	border: 1px solid var(--muted);
+	border: 0.0625em solid var(--muted);
 	border-left: none;
 	width: var(--quick-width);
-	gap: .5em;
+	gap: 0.5em;
 	z-index: 1;
-	height: 300px;
+	height: 30svh;
 	padding: 4em 1em;
 	box-sizing: border-box;
 	overflow: hidden;
@@ -218,7 +218,7 @@ q {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 1em;
+	padding: 0 0.5em;
 }
 article {
 	background: var(--card);
@@ -229,8 +229,8 @@ article {
 	max-height: 100svh;
 	display: flex;
 	flex-direction: column;
-	box-shadow: 0 4px 20px var(--shadow);
-	border-top: 4px solid var(--accent);
+	box-shadow: 0 0.25em 1em var(--shadow);
+	border-top: 0.25em solid var(--accent);
 	header {
 		display: flex;
 		align-items: center;
@@ -291,15 +291,15 @@ article {
 		.source {
 			display: flex;
 			align-items: center;
-			gap: .5em;
+			gap: 0.5em;
 			a {
 				color: var(--muted);
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				transition: color .2s;
-				padding: .5em;
-				margin: -.5em;
+				transition: color 0.2s;
+				padding: 0.5em;
+				margin: -0.5em;
 				&:hover {
 					color: var(--accent);
 				}
@@ -330,32 +330,32 @@ article {
 	.gallery {
 		display: grid;
 		grid-auto-flow: column dense;
-		grid-auto-columns: minmax(20px, clamp(20px, 25vw, 200px));
-		gap: .5em;
+		grid-auto-columns: minmax(3em, clamp(3em, 25vw, 10em));
+		gap: 0.5em;
 		margin-top: 1em;
 		button {
 			padding: 0;
 			margin: 0;
 			border: none;
 			background: transparent;
-			border-radius: .5em;
+			border-radius: 0.5em;
 			cursor: pointer;
-			transition: opacity .2s, filter .3s;
+			transition: opacity 0.2s, filter 0.3s;
 			&:hover:not(:disabled) {
-				opacity: .8;
+				opacity: 0.8;
 			}
 			&:disabled {
 				cursor: not-allowed;
 				user-select: none;
 			}
 			&.nsfw {
-				filter: blur(10px) contrast(0.2);
+				filter: blur(0.5em) contrast(0.2);
 				pointer-events: none;
 			}
 			img {
 				width: 100%;
 				height: auto;
-				border-radius: .5em;
+				border-radius: 0.5em;
 				object-fit: cover;
 				aspect-ratio: 1;
 				display: block;
@@ -376,26 +376,32 @@ dialog {
 	max-width: 100dvw;
 	max-height: 100dvh;
 	&::backdrop {
-		background: oklch(0 0 0 / .8);
+		background: oklch(0 0 0 / 0.8);
 	}
 }
 
 button {
+	border: none;
+	border-radius: 0.5em;
+	user-select: none;
+	cursor: pointer;
+	font-weight: bold;
+	corner-shape: squircle;
 	&:focus,
 	&:focus-visible {
-		outline: 2px solid var(--accent, var(--text));
-		outline-offset: 2px;
+		outline: 0.0625em solid var(--accent, var(--text));
+		outline-offset: 0.0625em;
 	}
 }
 
 #nsfw-warning {
-	border: 1px solid var(--muted);
-	background: var(--card);
+	border: 0.0625em solid var(--muted);
+	background-color: var(--card);
 	border-radius: 1em;
 	padding: 2em;
 	color: var(--text);
-	max-width: 400px;
-	box-shadow: 0 10px 30px var(--shadow);
+	max-width: 40ch;
+	box-shadow: 0 0.5em 1em var(--shadow);
 	text-align: center;
 	h2 {
 		margin-top: 0;
@@ -410,20 +416,16 @@ button {
 		flex-wrap: wrap;
 	}
 	button {
-		background: var(--text);
+		background-color: var(--text);
 		color: var(--card);
-		border: none;
-		border-radius: 0.5em;
 		padding: 0.75em 1.5em;
 		font-size: 1.1rem;
-		font-weight: bold;
-		cursor: pointer;
 		transition: opacity 0.2s;
 		&:hover {
 			opacity: 0.8;
 		}
 		&#reject-nsfw {
-			background: var(--muted);
+			background-color: var(--muted);
 		}
 	}
 }
@@ -450,20 +452,19 @@ button {
 	}
 	button {
 		position: absolute;
-		background: oklch(0 0 0 / .5);
-		color: #fff;
+		background-color: oklch(0 0 0 / 0.25);
+		color: var(--accent);
 		border: none;
 		border-radius: 50%;
-		width: 3em;
-		height: 3em;
-		font-size: 1.5rem;
+		width: 2em;
+		height: 2em;
+		font-size: 2em;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		cursor: pointer;
-		transition: background-color .2s;
+		transition: background-color 0.2s;
 		&:hover {
-			background: oklch(0 0 0 / .8);
+			background-color: oklch(0 0 0 / 0.8);
 		}
 		&#close {
 			top: 1em;
@@ -482,15 +483,16 @@ button {
 	}
 }
 
-@media (width > 700px) {
+@media (width > 45em) {
 	.post {
+		padding: 0 1em;
 		.card {
 			padding: 2em;
 		}
 	}
 }
 
-@media (width > 1000px) {
+@media (width > 60em) {
 	#background,
 	#app {
 		left: var(--quick-width);
@@ -601,15 +603,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		imageTemplate = document.getElementById('image-template'),
 		markup = (str) => {
 			// Regex breakdown:
-			// 1. ***bold italic***
-			// 2. **bold**
-			// 3. *italic*
-			// 4. "quote"
-			// 5 & 6. [text](https://...)
-			// 7. (https://...)
+			// ***bold italic***
+			// **bold**
+			// *italic*
+			// "quote"
+			// \n (line break)
+			// [text](https://...)
+			// (https://...)
 			const
 				root = document.createElement("p"),
-				regex = /\*\*\*(.*?)\*\*\*|\*\*(.*?)\*\*|\*(.*?)\*|"(.*?)"|\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)|\((https?:\/\/[^)\s]+)\)/g;
+				regex = /\*\*\*(.*?)\*\*\*|\*\*(.*?)\*\*|\*(.*?)\*|"(.*?)"|(\n)|\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)|\((https?:\/\/[^)\s]+)\)/g;
 			if (!str) return root;
 			let lastIndex = 0;
 			for (const match of str.matchAll(regex)) {
@@ -622,6 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					bold,
 					italic,
 					quote,
+					lineBreak,
 					linkText,
 					linkUrl,
 					autoLinkUrl,
@@ -644,15 +648,21 @@ document.addEventListener('DOMContentLoaded', () => {
 					const q = document.createElement("q");
 					q.textContent = quote;
 					root.append(q);
+				} else if (lineBreak) {
+					root.append(document.createElement("br"));
 				} else if (linkText && linkUrl) {
 					const a = document.createElement("a");
 					a.textContent = linkText;
 					a.href = linkUrl;
+					a.target = "_blank";
+					a.rel = "noopener noreferrer";
 					root.append(a);
 				} else if (autoLinkUrl) {
 					const a = document.createElement("a");
 					a.textContent = autoLinkUrl;
 					a.href = autoLinkUrl;
+					a.target = "_blank";
+					a.rel = "noopener noreferrer";
 					root.append(a);
 				}
 				lastIndex = match.index + fullMatch.length;
@@ -789,11 +799,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					document.body.classList.remove('male', 'female', 'other', 'author');
 					document.body.classList.add(... entry.target.querySelector('article').classList);
 					history.replaceState(null, null, '#' + entry.target.id);
-					
-					const quick = document.getElementById('quick');
-					const quickLinks = quick.querySelectorAll('a');
+					const
+						quick = document.getElementById('quick'),
+						quickLinks = quick.querySelectorAll('a'),
+						activeLink = quick.querySelector(`a[href="#${entry.target.id}"]`);
 					quickLinks.forEach(link => link.classList.remove('active'));
-					const activeLink = quick.querySelector(`a[href="#${entry.target.id}"]`);
 					if (activeLink) {
 						activeLink.classList.add('active');
 						quick.scrollTo({
@@ -801,7 +811,6 @@ document.addEventListener('DOMContentLoaded', () => {
 							behavior: 'smooth'
 						});
 					}
-
 					clearTimeout(NSFW.timeout);
 					if (!NSFW.answered && !!entry.target.querySelector('.nsfw') && !dialogNSFW.open) {
 						NSFW.timeout = setTimeout(() => {
@@ -828,7 +837,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		// Rotary encoder wheel & touch controls on #quick
 		const quick = document.getElementById('quick');
 		quick.addEventListener('wheel', (e) => {
 			e.preventDefault();
