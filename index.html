@@ -62,12 +62,17 @@
 	--hue-female: 340;
 	--hue-male: 240;
 	--hue-other: 300;
-	--hue-accent: 140;
 	--hue-author: 60;
 	--shadow: oklch(0.5 0 0 / 0.1);
+
 	--light: 0.7;
 	--chroma: 0.18;
-	--accent: oklch(var(--light) var(--chroma) var(--hue-accent));
+
+	--light-hover: 0.6;
+	--chroma-hover: 0.18;
+
+	--light-active: 0.5;
+	--chroma-active: 0.18;
 
 	--quick-width: 20ch;
 }
@@ -81,6 +86,10 @@
 		--shadow: oklch(0 0 0 / 0.4);
 		--light: 0.9;
 		--chroma: 0.11;
+		--light-hover: 1;
+		--chroma-hover: 0.08;
+		--light-active: 1;
+		--chroma-active: 0.04;
 	}
 }
 
@@ -103,23 +112,26 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	height: 100svh;
+	--height: 100svh;
 	overflow: hidden;
 	font-family: system-ui, sans-serif;
 	background: var(--body);
 	color: var(--text);
-	scrollbar-color: var(--accent) var(--body);
-	--accent: oklch(var(--light) var(--chroma) var(--hue));
+	--_accent: oklch(var(--light) var(--chroma) var(--hue));
+	scrollbar-color: var(--_accent) var(--body);
 	transition: scrollbar-color 0.3s, color 0.3s;
 }
 
 a {
-	color: var(--accent);
+	color: var(--_accent);
 	text-decoration: none;
 	transition: color 0.2s;
 	&:hover {
-		color: var(--accent);
+		color: oklch(var(--light-hover) var(--chroma-hover) var(--hue));
 		text-decoration: underline;
+	}
+	&:active {
+		color: oklch(var(--light-active) var(--chroma-active) var(--hue));
 	}
 }
 b {
@@ -138,33 +150,37 @@ q {
 	z-index: -1;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 	flex-direction: column;
+	&:after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-color: oklch(from var(--body) l c h / 0.5);
+	}
 	h1, div {
 		color: var(--muted);
 		text-align: center;
-		padding: 0 1em;
+		padding: 1em;
 		margin: 0;
 		text-wrap-style: balance;
 	}
 	h1 {
-		font-size: clamp(2rem, 5vw + 1rem, 4rem);
+		font-size: clamp(2em, 5vw + 1rem, 4em);
 		font-weight: bold;
 	}
 	div {
-		font-size: clamp(1rem, 2vw + .5rem, 2rem);
-		margin-top: 0.5em;
+		font-size: clamp(.75em, 2vw + .5rem, 1em);
 	}
 }
 
 #app {
-	height: 100svh;
 	overflow-y: scroll;
 	scroll-snap-type: y mandatory;
 	scroll-behavior: smooth;
 	position: fixed;
-	z-index: 2;
 	inset: 0;
+	gap: 1em;
 }
 #quick {
 	position: fixed;
@@ -176,20 +192,16 @@ q {
 	flex-direction: column;
 	background: var(--card);
 	border-radius: 0 1em 1em 0;
-	border: 0.0625em solid var(--muted);
+	border: 0.0625em solid var(--_accent);
 	border-left: none;
 	width: var(--quick-width);
 	gap: 0.5em;
-	z-index: 1;
 	height: 30svh;
 	padding: 4em 1em;
-	box-sizing: border-box;
 	overflow: hidden;
 	mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
 	-webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
 	a {
-		text-decoration: none;
-		color: var(--text);
 		opacity: 0.3;
 		transform-origin: left center;
 		transition:
@@ -226,11 +238,11 @@ article {
 	padding: 1em;
 	min-width: 20ch;
 	max-width: 90ch;
-	max-height: 100svh;
+	max-height: 90svh;
 	display: flex;
 	flex-direction: column;
 	box-shadow: 0 0.25em 1em var(--shadow);
-	border-top: 0.25em solid var(--accent);
+	border-top: 0.25em solid var(--_accent);
 	header {
 		display: flex;
 		align-items: center;
@@ -242,7 +254,7 @@ article {
 			width: 3em;
 			height: 3em;
 			border-radius: 50%;
-			background: var(--accent, var(--text));
+			background: var(--_accent, var(--text));
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -269,14 +281,6 @@ article {
 				font-weight: bold;
 				font-size: 1.2em;
 				flex: 1 1 100%;
-				a {
-					color: var(--accent);
-					text-decoration: none;
-					&:hover {
-						text-decoration: underline;
-						color: var(--text);
-					}
-				}
 			}
 			.details {
 				display: flex;
@@ -293,16 +297,12 @@ article {
 			align-items: center;
 			gap: 0.5em;
 			a {
-				color: var(--muted);
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				transition: color 0.2s;
 				padding: 0.5em;
 				margin: -0.5em;
-				&:hover {
-					color: var(--accent);
-				}
 				svg {
 					width: 1.5em;
 					height: 1.5em;
@@ -315,11 +315,10 @@ article {
 			}
 		}
 	}
-
 	.content {
 		line-height: 1.5;
 		overflow-y: auto;
-		scrollbar-color: var(--accent) var(--card);
+		scrollbar-color: var(--_accent) var(--card);
 		p {
 			margin: 0 0 1em 0;
 			&:last-child {
@@ -386,16 +385,15 @@ button {
 	user-select: none;
 	cursor: pointer;
 	font-weight: bold;
-	corner-shape: squircle;
 	&:focus,
 	&:focus-visible {
-		outline: 0.0625em solid var(--accent, var(--text));
+		outline: 0.0625em solid var(--_accent, var(--text));
 		outline-offset: 0.0625em;
 	}
 }
 
 #nsfw-warning {
-	border: 0.0625em solid var(--muted);
+	border: 0.0625em solid var(--_accent);
 	background-color: var(--card);
 	border-radius: 1em;
 	padding: 2em;
@@ -416,7 +414,7 @@ button {
 		flex-wrap: wrap;
 	}
 	button {
-		background-color: var(--text);
+		background-color: var(--_accent);
 		color: var(--card);
 		padding: 0.75em 1.5em;
 		font-size: 1.1rem;
@@ -453,7 +451,7 @@ button {
 	button {
 		position: absolute;
 		background-color: oklch(0 0 0 / 0.25);
-		color: var(--accent);
+		color: var(--_accent);
 		border: none;
 		border-radius: 50%;
 		width: 2em;
@@ -514,6 +512,7 @@ button {
 		<a href="https://x.com/hashtag/BodilyAutonomy" target="_blank">#BodilyAutonomy</a>
 		<a href="https://x.com/hashtag/GenitalAutonomy" target="_blank">#GenitalAutonomy</a>
 		<a href="https://x.com/hashtag/MaleGenitalMutilation" target="_blank">#MaleGenitalMutilation</a>
+		<a href="https://x.com/hashtag/Intactivist" target="_blank">#Intactivist</a>
 	</div>
 </div>
 <aside id="quick"></aside>
@@ -566,7 +565,8 @@ button {
 
 <dialog id="nsfw-warning">
 	<h2>Content Warning</h2>
-	<p>Some images in this gallery contain sensitive or graphic content related to medical procedures or injuries. Do you want to reveal them?</p>
+	<p>Some images in this gallery contain sensitive or graphic content.</p>
+	<p>Do you want to reveal them?</p>
 	<form method="dialog">
 		<button id="reject-nsfw" autofocus>No</button>
 		<button id="accept-nsfw">Yes</button>
