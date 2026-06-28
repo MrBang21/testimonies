@@ -63,6 +63,7 @@
 	--hue-male: 240;
 	--hue-other: 300;
 	--hue-author: 60;
+	--hue-shared: 180;
 	--shadow: oklch(0.5 0 0 / 0.1);
 
 	--light: 0.7;
@@ -103,6 +104,7 @@
 	&.female { --hue: var(--hue-female); }
 	&.other { --hue: var(--hue-other); }
 	&.author { --hue: var(--hue-author); }
+	&.shared { --hue: var(--hue-shared); }
 }
 
 html {
@@ -152,6 +154,8 @@ q {
 	align-items: center;
 	justify-content: space-between;
 	flex-direction: column;
+	transition: 
+		left 0.3s;
 	&:after {
 		content: "";
 		position: absolute;
@@ -180,15 +184,15 @@ q {
 	scroll-behavior: smooth;
 	position: fixed;
 	inset: 0;
-	gap: 1em;
+	transition: 
+		left 0.3s;
 }
 #quick {
 	position: fixed;
 	top: 50%;
-	left: 0;
+	left: -100%;
 	transform: translateY(-50%);
 	display: flex;
-	display: none;
 	flex-direction: column;
 	background: var(--card);
 	border-radius: 0 1em 1em 0;
@@ -201,6 +205,8 @@ q {
 	overflow: hidden;
 	mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
 	-webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+	transition: 
+		left 0.3s;
 	a {
 		opacity: 0.3;
 		transform-origin: left center;
@@ -497,6 +503,7 @@ button {
 	}
 	#quick {
 		display: flex;
+		left: 0;
 	}
 }
 </style>
@@ -686,9 +693,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		.then(response => response.json())
 		.then(data => {
 			let anon = 0;
-			data.sort(() => Math.random() - 0.5);
 			const fragment = document.createDocumentFragment();
-
+			data.sort(() => Math.random() - 0.5);
 			data.forEach(item => {
 				const
 					postClone = postTemplate.content.cloneNode(true),
@@ -747,21 +753,22 @@ document.addEventListener('DOMContentLoaded', () => {
 						date.textContent = dateObj.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 						date.setAttribute('datetime', dateObj.toISOString());
 					}
-				}
-				else {
+				} else {
 					date.remove();
 				}
+
 				if (item.location) {
 					location.textContent = item.location;
-				}
-				else {
+				} else {
 					location.remove();
 				}
+
 				if (item.source) {
 					soureLink.href = item.source;
 				} else {
 					source.remove();
 				}
+
 				if (Array.isArray(item.content)) {
 					item.content.forEach(text => {
 						content.append(markup(text));
@@ -769,6 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				} else {
 					content.append(markup(item.content));
 				}
+
 				if (item.gallery && item.gallery.length > 0) {
 					item.gallery.slice(0, 4).forEach(itemObj => {
 						const
@@ -788,8 +796,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						}
 						gallery.append(imgClone);
 					});
-				}
-				else {
+				} else {
 					gallery.remove();
 				}
 				fragment.append(postClone);
