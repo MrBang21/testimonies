@@ -694,6 +694,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		.then(data => {
 			let anon = 0;
 			const fragment = document.createDocumentFragment();
+			data.forEach(item => {
+				if (!item.id) {
+					item.id = ++anon;
+				}
+			});
 			data.sort(() => Math.random() - 0.5);
 			data.forEach(item => {
 				const
@@ -713,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					quickLink = quickItem.querySelector('a'),
 					quickName = quickItem.querySelector('.name');
 
-				post.id = item.id || ++anon;
+				post.id = item.id;
 				article.classList.add(item.gender || 'shared');
 
 				if (item.picture) {
